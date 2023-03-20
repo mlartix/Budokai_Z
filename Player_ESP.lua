@@ -86,16 +86,13 @@ end
 
 game.Players.PlayerAdded:Connect(function(player)
     local char = player.CharacterAdded:Wait()
-    if player ~= game.Players.LocalPlayer and player.Character and player.Character:FindFirstChild("Core") and player.Character.Core:FindFirstChild("PowerLevel") then
+    local Core = char:WaitForChild("Core")
+    local PowerLevel = Core:WaitForChild("PowerLevel")
+
+    if player ~= game.Players.LocalPlayer and player.Character and Core and PowerLevel then
         ESP(player, player.Name)
     end
 end)
-
-for _,v in pairs(workspace:GetChildren()) do 
-    if v:IsA("Model") and string.find(v.Name:lower(), "treeorb") then
-        ESP(v.PrimaryPart, tostring(v.Name))
-    end
-end
 
 game:GetService("UserInputService").InputBegan:Connect(function(input, gameProcessed)
     --if gameProcessed then return end
